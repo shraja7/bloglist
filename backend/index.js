@@ -1,5 +1,8 @@
-import express from "express";
-import cors from "cors";
+//require express and cors
+const express = require("express");
+const cors = require("cors");
+const Blog = require("./models/blog");
+const connectToDatabase = require("./app");
 
 const app = express();
 
@@ -20,7 +23,18 @@ app.post("/api/blogs", (request, response) => {
   });
 });
 
-const PORT = 3003;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+connectToDatabase()
+  .then(() => {
+    const PORT = 3003;
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((error) => {
+    console.log("Error connecting to database:", error);
+  });
+
+// const PORT = 3003;
+// app.listen(PORT, () => {
+//   console.log(`Server running on port ${PORT}`);
+// });
