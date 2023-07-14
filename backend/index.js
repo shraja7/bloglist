@@ -1,19 +1,7 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+
 const app = express();
-const cors = require("cors");
-const mongoose = require("mongoose");
-
-const blogSchema = new mongoose.Schema({
-  title: String,
-  author: String,
-  url: String,
-  likes: Number,
-});
-
-const Blog = mongoose.model("Blog", blogSchema);
-
-const mongoUrl = "mongodb://localhost/bloglist";
-mongoose.connect(mongoUrl);
 
 app.use(cors());
 app.use(express.json());
